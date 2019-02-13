@@ -1,0 +1,23 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Selectcontroller extends CI_Controller {
+
+  public function index()
+	{
+		if ($this->input->post()){
+		    $keyword=$this->input->post("search");
+		    
+		    $credentials = array(
+		    	'keyword' => $keyword,
+		    	);
+
+	        $this->load->model('Selectmodel');
+	        $data['results']= $this->Selectmodel->searchKeyword($credentials);
+
+	        $this->load->view('Selectresult',$data);
+        }else{    
+            $this->load->view('Selectview');
+        }    
+	}
+}
